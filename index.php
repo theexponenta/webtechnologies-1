@@ -11,6 +11,6 @@ $db_config = $config["database"];
 $session = new DBSession($db_config["host"], $db_config["port"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
 
 $router = new Router($session);
-$router->addRoute(Method::GET, '/', MainController::class, 'view');
+$router->addRoute('GET', '/', MainController::class, 'view');
 
 $router->route($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
