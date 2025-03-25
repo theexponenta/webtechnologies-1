@@ -8,16 +8,16 @@ require_once 'Route.php';
 class Router {
 
     private array $routes;
-    private DBSession $db_session;
+    private DBSession $dbSession;
 
-    public function __construct($db_session) {
+    public function __construct(DBSession $dbSession) {
         $this->routes = [];
-        $this->db_session = $db_session;
+        $this->dbSession = $dbSession;
     }
 
     public function route($path, $method) {
         $route = $this->getRoute($path, $method);
-        $controller = new ($route->getControllerClass())($this->db_session);
+        $controller = new ($route->getControllerClass())($this->dbSession);
         
         $controllerMethod = $route->getControllerMethod();
         $controller->$controllerMethod();

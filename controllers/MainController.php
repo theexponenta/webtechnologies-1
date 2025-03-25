@@ -6,10 +6,10 @@ require_once __DIR__.'/../database/DBSession.php';
 
 class MainController {
 
-    private DBSession $db_session;
+    private DBSession $dbSession;
 
-    public function __construct($db_session) {
-        $this->db_session = $db_session;
+    public function __construct($dbSession) {
+        $this->dbSession = $dbSession;
     }
 
     public function view() {

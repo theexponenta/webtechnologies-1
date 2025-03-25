@@ -7,8 +7,8 @@ require_once 'Router.php';
 
 $config = json_decode(file_get_contents("config.json"), true);
 
-$db_config = $config["database"];
-$session = new DBSession($db_config["host"], $db_config["port"], $db_config["username"], $db_config["password"], $db_config["dbname"]);
+$dbConfig = $config["database"];
+$session = new DBSession($dbConfig["host"], $dbConfig["port"], $dbConfig["username"], $dbConfig["password"], $dbConfig["dbname"]);
 
 $router = new Router($session);
 $router->addRoute('GET', '/', MainController::class, 'view');
