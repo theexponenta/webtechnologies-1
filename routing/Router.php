@@ -3,6 +3,7 @@
 
 require_once __DIR__.'/../database/DBSession.php';
 require_once 'Route.php';
+require_once 'Request.php';
 
 
 class Router {
@@ -15,12 +16,19 @@ class Router {
         $this->dbSession = $dbSession;
     }
 
-    public function route($path, $method) {
+    public function route(Request $request) {
+        $path = $request->getPath();
+        $method = $request->getMethod();
+
         $route = $this->getRoute($path, $method);
+        if (!$route) {
+            return;
+        }
+
         $controller = new ($route->getControllerClass())($this->dbSession);
         
         $controllerMethod = $route->getControllerMethod();
-        $controller->$controllerMethod();
+        echo $controller->$controllerMethod($request);
     }
 
     public function addRoute(string $method, string $path, $contollerClass, $controllerMethod) {
@@ -29,8 +37,9 @@ class Router {
 
     private function getRoute($path, $method) {
         foreach ($this->routes as $route) {
-            if ($route->getPath() == $path && $route->getMethod() == $method)
+            if ($route->getPath() == $path && $route->getMethod() == $method) {
                 return $route;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 
 
 require_once __DIR__.'/../database/DBSession.php';
+require_once __DIR__.'/../routing/Request.php';
 
 
 class MainController {
@@ -12,8 +13,8 @@ class MainController {
         $this->dbSession = $dbSession;
     }
 
-    public function view() {
-        include __DIR__.'/../views/main.html';    
+    public function view(Request $request) {
+        return file_get_contents(__DIR__.'/../views/main.html');    
     }
 
 }
