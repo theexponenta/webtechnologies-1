@@ -13,5 +13,7 @@ $session = new DBSession($dbConfig["host"], $dbConfig["port"], $dbConfig["userna
 
 $router = new Router($session);
 $router->addRoute('GET', '/', MainController::class, 'view');
+$router->addRoute('GET', '/admin', AdminController::class, 'action');
+$router->addRoute('POST', '/admin', AdminController::class, 'action');
 
 $router->route(Request::fromCurrentRequest());

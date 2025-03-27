@@ -1,0 +1,71 @@
+.dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.dialog {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 60%;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-header {
+    margin-bottom: 20px;
+}
+
+.dialog-header h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.dialog-content {
+    margin-bottom: 30px;
+    height: 50vh;
+}
+
+#file-contents {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.dialog-actions {
+    text-align: right;
+}
+
+.filedialog-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#save-file-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#exit-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.filedialog-button:hover {
+    opacity: 0.9;
+}

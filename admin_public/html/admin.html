@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/admin_public/css/admin.css">
+        <link rel="stylesheet" href="/admin_public/css/filedialog.css">
+        <script type="text/javascript" src="/admin_public/js/admin.js"></script>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="file-content-dialog" class="dialog-overlay" style="display: none;">
+            <div class="dialog">
+                <div class="dialog-header">
+                    <h2>Просмотр содержимого файла</h2>
+                </div>
+                <div class="dialog-content">
+                    <textarea id="file-contents"></textarea>
+                </div>
+                <div class="dialog-actions">
+                    <button class="filedialog-button" id="save-file-btn">Сохранить</button>
+                    <button class="filedialog-button" id="exit-btn">Выйти</button>
+                </div>
+            </div>
+        </div>
+        <main class="hosting__content js-content-wrapper">
+            <div id="layout-pjax" data-pjax-container="" data-pjax-push-state="" data-pjax-timeout="0">
+                <div id="w0-0-67e333f7" class="notification-list" data-instanced="true"></div>
+                <div id="newFM">
+                    <div id="mainFM" class="c-cmpvrW">
+                        <div class="c-PJLV">
+                            <div class="c-dQtwGk fileman">
+                                <div class="c-gmrHLS c-gmrHLS-ldSnCn-shouldShowTabs-false">
+                                    <div class="c-fPsvuE">
+                                        <div>
+                                            <button id="upload-btn" class="c-kklKhm" aria-expanded="false">
+                                                <label for="upload_fm" class="c-hDSXJL">
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="#1B364A" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.243 1.758c-.385-.092-.785-.092-1.314-.092H8.133c-.67 0-1.225 0-1.676.037-.468.038-.899.12-1.303.326-.627.32-1.137.83-1.457 1.457-.206.405-.288.835-.326 1.304-.037.45-.037 1.004-.037 1.675v7.069c0 .67 0 1.224.037 1.675.038.469.12.9.326 1.304.32.627.83 1.137 1.457 1.456.404.206.835.289 1.303.327.451.037 1.005.037 1.676.037h3.735c.671 0 1.225 0 1.676-.037.468-.038.899-.12 1.303-.327a3.334 3.334 0 001.457-1.456c.206-.405.288-.835.327-1.304.036-.45.036-1.004.036-1.675v-6.13c0-.528 0-.928-.092-1.314a3.33 3.33 0 00-.399-.963c-.207-.338-.49-.621-.864-.995l-1.11-1.11c-.374-.375-.657-.658-.995-.865a3.334 3.334 0 00-.964-.399zm-1.409 1.575H8.167c-.713 0-1.199 0-1.574.031-.365.03-.552.084-.682.15-.314.16-.569.415-.729.729-.066.13-.12.317-.15.682-.03.375-.031.86-.031 1.574v7c0 .714 0 1.2.03 1.574.03.366.085.553.151.683.16.314.415.569.729.728.13.067.317.12.682.15.375.031.86.032 1.574.032h3.667c.714 0 1.199 0 1.574-.031.366-.03.552-.084.683-.15.313-.16.568-.415.728-.729.066-.13.12-.317.15-.683.031-.375.032-.86.032-1.574v-6h-1.667a2.5 2.5 0 01-2.5-2.5V3.333zm3.8 2.5c-.1-.119-.26-.282-.56-.583l-.991-.99c-.3-.3-.464-.46-.582-.56V5c0 .46.373.833.833.833h1.3z"></path>
+                                                        <path d="M10.59 8.578a.833.833 0 00-1.18 0l-1.666 1.667a.833.833 0 101.179 1.178l.244-.244v2.988a.833.833 0 101.666 0V11.18l.244.244a.833.833 0 101.179-1.178l-1.667-1.667z"></path>
+                                                    </svg>
+                                                    Загрузить
+                                                </label>
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button id="new-folder-btn" class="c-kklKhm" aria-expanded="false">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M18.983 8.642a.835.835 0 00-.65-.309h-1.666V7.5a2.5 2.5 0 00-2.5-2.5H8.933l-.266-.833A2.5 2.5 0 006.3 2.5H3.333A2.5 2.5 0 00.833 5v10a2.5 2.5 0 002.5 2.5h12a2.499 2.499 0 002.434-1.958l1.4-6.192a.833.833 0 00-.184-.708zM4.475 15.183a.834.834 0 01-.833.65h-.309A.833.833 0 012.5 15V5a.833.833 0 01.833-.833H6.3a.833.833 0 01.833.566l.45 1.367a.833.833 0 00.75.567h5.834A.833.833 0 0115 7.5v.833H6.667a.833.833 0 00-.834.65l-1.358 6.2zm11.667 0a.834.834 0 01-.834.65h-9.3c.043-.092.074-.19.092-.291L7.333 10h10l-1.191 5.183z" fill="currentColor"></path>
+                                                </svg>
+                                                Создать папку
+                                            </button>
+                                        </div>
+                                        <div>
+                                            <button id="new-file-btn" class="c-kklKhm" aria-expanded="false">
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.243 1.759c-.386-.093-.786-.093-1.315-.092H8.132c-.67 0-1.224 0-1.675.037-.469.038-.9.12-1.304.326-.627.32-1.137.83-1.456 1.457-.206.404-.289.835-.327 1.303-.037.451-.037 1.005-.037 1.676v7.068c0 .671 0 1.225.037 1.676.038.468.12.899.327 1.303.32.627.83 1.137 1.456 1.457.405.206.835.288 1.304.327.45.036 1.004.036 1.675.036h3.736c.67 0 1.224 0 1.675-.036.469-.039.9-.12 1.304-.327a3.333 3.333 0 001.456-1.457c.206-.404.289-.835.327-1.303.037-.451.037-1.005.037-1.676V7.405c0-.529 0-.929-.092-1.314a3.33 3.33 0 00-.4-.964c-.207-.338-.49-.62-.864-.994l-1.11-1.11c-.374-.375-.657-.658-.995-.865a3.334 3.334 0 00-.963-.4zm-1.41 1.574H8.167c-.714 0-1.2.001-1.574.032-.366.03-.553.084-.683.15-.314.16-.569.415-.728.728-.067.13-.12.318-.15.683C5 5.3 5 5.786 5 6.5v7c0 .714 0 1.2.031 1.574.03.366.084.552.15.683.16.313.415.568.73.728.13.066.316.12.682.15.375.031.86.032 1.574.032h3.666c.714 0 1.2-.001 1.575-.032.365-.03.552-.084.682-.15.314-.16.569-.415.728-.728.067-.13.12-.317.15-.683C15 14.7 15 14.214 15 13.5v-6h-1.667a2.5 2.5 0 01-2.5-2.5V3.333zm3.8 2.5c-.1-.118-.26-.281-.56-.582l-.99-.99c-.301-.3-.465-.46-.583-.561V5c0 .46.373.833.833.833h1.3z" fill="#1B364A"></path>
+                                                </svg>
+                                                Создать файл
+                                            </button>
+                                        </div>
+                                        <div class="c-gZnonw"></div>
+                                        <div><button id="delete-btn" class="c-kklKhm" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.833 6.667V15c0 .92.746 1.667 1.667 1.667h5c.92 0 1.667-.747 1.667-1.667V6.667h1.666V15a3.333 3.333 0 01-3.333 3.333h-5A3.333 3.333 0 014.167 15V6.667h1.666z" fill="#D86962"></path><path d="M8.333 9.167A.833.833 0 007.5 10v3.333a.833.833 0 001.667 0V10a.833.833 0 00-.834-.833zM11.667 9.167a.833.833 0 00-.834.833v3.333a.833.833 0 001.667 0V10a.833.833 0 00-.833-.833z" fill="#D86962"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M6.667 5v-.833a2.5 2.5 0 012.5-2.5h1.666a2.5 2.5 0 012.5 2.5V5h2.5a.833.833 0 010 1.667H4.167a.833.833 0 010-1.667h2.5zm1.666-.833c0-.46.373-.834.834-.834h1.666c.46 0 .834.373.834.834V5H8.333v-.833z" fill="#D86962"></path></svg></button></div>
+                                    </div>
+                                </div>
+                                <div data-test-id="fm-test-view-rows" id="fileListFm" class="c-jXMhjL">
+                                    <div data-test-id="fm-test-LeftWindow" class="c-hTtMLY c-hTtMLY-kawXzh-id-LeftWindow">
+                                        <div class="c-lkBNdM">
+                                            <div class="c-ddveYH">
+                                                <div style="overflow: visible; height: 0px;">
+                                                    <div class="c-jkfjcE" style="position: relative; height: 470px; overflow: auto; will-change: transform; direction: ltr;">
+                                                        <div id="file-list-container">
+
+                                                            {{ foreach (files as file) }}
+
+                                                            <div data-file-type="{{file['type']}}" data-file-name="{{file['name']}}" class="c-hEpWEg">
+                                                                <div class="list-item-wrapper2">
+                                                                    <div class="list-item-wrapper3">
+                                                                        <div class="c-ccgyxQ">
+                                                                            <li class="c-dFGrsz">
+                                                                                <span class="c-dWRufC">
+                                                                                    <span class="c-eKyYNR checkboxIconSelector">
+                                                                                        <div class="c-gqwkJN"><img src="{{filetypeIcons[file['type']]}}" /></div>
+                                                                                    </span>
+                                                                                    <span class="filename-text">{{file["name"]}}</span>
+                                                                                </span>
+                                                                            </li>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{ endforeach }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="file" id="upload-file-input" class="c-kBYYkb">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="c-hArIqw c-hArIqw-kBYYkb-isShow-false">
+                                    <header class="c-fgVkPo">
+                                        <p></p>
+                                        <div class="c-bPzkSd">
+                                            <button class="c-ikOSyd">
+                                                UTF-8
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 16a1 1 0 01-.64-.23l-5-4a1.001 1.001 0 011.28-1.54L12 13.71l4.36-3.32a1.001 1.001 0 011.41.15 1 1 0 01-.14 1.46l-5 3.83A1 1 0 0112 16z" fill="currentColor"></path>
+                                                </svg>
+                                            </button>
+                                            <div class="c-dHvRSf"></div>
+                                            <button class="c-hszbQb c-hszbQb-ifAxnk-color-accent c-hszbQb-jgdrLl-size-m c-jjBIPw">Сохранить (Ctrl+S)</button>
+                                            <div>
+                                                <button data-test-id="fm-test-toolbar-expand-btn" class="c-PJLV c-pUBoR" aria-expanded="false">
+                                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="c-gxKnbm">
+                                                        <path d="M8.158 10.658l-2.325 2.334v-1.325a.833.833 0 00-1.666 0V15a.833.833 0 00.066.317.834.834 0 00.45.45c.1.042.208.065.317.066h3.333a.833.833 0 100-1.666H7.008l2.334-2.325a.837.837 0 00-1.184-1.184zm7.609-5.975a.833.833 0 00-.45-.45.833.833 0 00-.317-.066h-3.333a.833.833 0 100 1.666h1.325l-2.334 2.325a.833.833 0 000 1.184.833.833 0 001.184 0l2.325-2.334v1.325a.833.833 0 101.666 0V5a.833.833 0 00-.066-.317z" fill="currentColor"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </header>
+                                    <section style="display: flex; position: relative; text-align: initial; width: 100%; height: 100%;">
+                                        <div class="c-SsfIM" data-keybinding-context="5" data-mode-id="plaintext" style="width: 100%; --vscode-editorCodeLens-lineHeight: 16px; --vscode-editorCodeLens-fontSize: 12px; --vscode-editorCodeLens-fontFeatureSettings: &quot;liga&quot; off, &quot;calt&quot; off;">
+                                            <div class="monaco-editor no-user-select  showUnused showDeprecated vs" role="code" data-uri="inmemory://model/5" style="width: 5px; height: 5px;">
+                                                <div data-mprt="3" class="overflow-guard" style="width: 5px; height: 5px;">
+                                                    <div class="margin" role="presentation" aria-hidden="true" style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; height: 19px; width: 64px;">
+                                                        <div class="glyph-margin" style="left: 0px; width: 0px; height: 19px;"></div>
+                                                        <div class="margin-view-zones" role="presentation" aria-hidden="true" style="position: absolute;"></div>
+                                                        <div class="margin-view-overlays" role="presentation" aria-hidden="true" style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 64px; height: 19px;">
+                                                            <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                                <div class="current-line current-line-margin-both" style="width:64px; height:19px;"></div>
+                                                                <div class="line-numbers active-line-number" style="left:0px;width:38px;">1</div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="glyph-margin-widgets" style="position: absolute; top: 0px;"></div>
+                                                    </div>
+                                                    <div class="monaco-scrollable-element editor-scrollable vs" role="presentation" data-mprt="5" style="position: absolute; overflow: hidden; left: 64px; height: 5px;">
+                                                        <div class="lines-content monaco-editor-background" style="position: absolute; overflow: hidden; width: 1e+06px; height: 1e+06px; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; left: 0px;">
+                                                            <div class="view-overlays" role="presentation" aria-hidden="true" style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; height: 0px; width: 15px;">
+                                                                <div style="position:absolute;top:0px;width:100%;height:19px;">
+                                                                    <div class="current-line" style="width:15px; height:19px;"></div>
+                                                                </div>
+                                                            </div>
+                                                            <div role="presentation" aria-hidden="true" class="view-rulers"></div>
+                                                            <div class="view-zones" role="presentation" aria-hidden="true" style="position: absolute;"></div>
+                                                            <div class="view-lines monaco-mouse-cursor-text" role="presentation" aria-hidden="true" data-mprt="7" style="position: absolute; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; width: 15px; height: 19px;">
+                                                                <div style="top:0px;height:19px;" class="view-line"><span><span></span></span></div>
+                                                            </div>
+                                                            <div data-mprt="1" class="contentWidgets" style="position: absolute; top: 0px;"></div>
+                                                            <div role="presentation" aria-hidden="true" class="cursors-layer cursor-line-style cursor-solid">
+                                                                <div class="cursor monaco-mouse-cursor-text " style="height: 19px; top: 0px; left: 0px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; display: block; visibility: hidden; padding-left: 0px; width: 1.6px;"></div>
+                                                            </div>
+                                                        </div>
+                                                        <div role="presentation" aria-hidden="true" class="invisible scrollbar horizontal fade" style="position: absolute; width: 0px; height: 12px; left: 0px; bottom: 0px;">
+                                                            <div class="slider" style="position: absolute; top: 0px; left: 0px; height: 12px; transform: translate3d(0px, 0px, 0px); contain: strict; width: 20px;"></div>
+                                                        </div>
+                                                        <canvas class="decorationsOverviewRuler" aria-hidden="true" width="17" height="6" style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; top: 0px; right: 0px; width: 14px; height: 5px; display: block;"></canvas>
+                                                        <div role="presentation" aria-hidden="true" class="invisible scrollbar vertical fade" style="position: absolute; width: 14px; height: 5px; right: 0px; top: 0px;">
+                                                            <div class="slider" style="position: absolute; top: 0px; left: 0px; width: 14px; transform: translate3d(0px, 0px, 0px); contain: strict; height: 20px;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div role="presentation" aria-hidden="true"></div>
+                                                    <textarea data-mprt="6" class="inputarea monaco-mouse-cursor-text" wrap="on" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" aria-label="Editor content;Press Alt+F1 for Accessibility Options." aria-required="false" tabindex="0" role="textbox" aria-roledescription="editor" aria-multiline="true" aria-haspopup="false" aria-autocomplete="both" style="tab-size: 30.7969px; font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: normal; font-size: 14px; font-feature-settings: &quot;liga&quot; 0, &quot;calt&quot; 0; font-variation-settings: normal; line-height: 19px; letter-spacing: 0px; top: 0px; left: 0px; width: 8px; height: 1px;"></textarea>
+                                                    <div class="monaco-editor-background textAreaCover line-numbers" style="position: absolute; top: 0px; left: 0px; width: 8px; height: 1px;"></div>
+                                                    <div data-mprt="4" class="overlayWidgets" style="width: 5px;"></div>
+                                                    <div data-mprt="8" class="minimap slider-mouseover" role="presentation" aria-hidden="true" style="position: absolute; left: -17px; width: 8px; height: 5px;">
+                                                        <div class="minimap-shadow-visible" style="height: 5px;"></div>
+                                                        <canvas width="10" height="6" style="position: absolute; left: 0px; width: 8px; height: 4.8px;"></canvas>
+                                                        <canvas class="minimap-decorations-layer" width="10" height="6" style="position: absolute; left: 0px; width: 8px; height: 4.8px;"></canvas>
+                                                        <div class="minimap-slider" style="position: absolute; transform: translate3d(0px, 0px, 0px); contain: strict; width: 8px; display: block; top: 0px; height: 0px;">
+                                                            <div class="minimap-slider-horizontal" style="position: absolute; left: 0px; width: 8px; top: 0px; height: 0px;"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div role="presentation" aria-hidden="true" class="blockDecorations-container"></div>
+                                                </div>
+                                                <div data-mprt="2" class="overflowingContentWidgets"></div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="c-kOZUUP"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>      
+    </body>
+</html>
