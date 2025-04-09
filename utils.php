@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 function rrmdir(string $dir): void { 
     if (is_dir($dir)) { 
       $objects = scandir($dir);

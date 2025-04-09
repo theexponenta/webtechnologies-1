@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 
 require_once __DIR__.'/../routing/Request.php';
 require_once __DIR__.'/../services/AdminService.php';

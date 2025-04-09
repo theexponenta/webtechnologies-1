@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 require_once __DIR__.'/../utils.php';
 
@@ -38,6 +39,8 @@ class AdminService {
     public static function directoryExists(string $path): bool {
         $pathTrimmed = trim($path, "/");
         $fullPath = realpath(AdminService::$basePath."/".$pathTrimmed);
+        if (!$fullPath)
+            return false;
 
         return is_dir($fullPath);
     }

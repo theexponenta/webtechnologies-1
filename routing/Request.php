@@ -1,5 +1,8 @@
 <?php
 
+declare(strict_types=1);
+
+
 class Request {
     private string $method;
     private string $path;

@@ -1,15 +1,18 @@
 <?php
 
 
+declare(strict_types=1);
+
+
 require_once __DIR__.'/../database/DBSession.php';
 
 
-abstract class EntityRespository {
+abstract class EntityRepository {
 
-    protected DBSession $session;
+    protected DBSession $dbSession;
 
-    public function __construct($entityManager) {
-        $this->entityManager = $entityManager;
+    public function __construct($dbSession) {
+        $this->dbSession = $dbSession;
     }
 
     abstract function getById($id);
