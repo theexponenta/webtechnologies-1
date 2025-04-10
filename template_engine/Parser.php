@@ -3,69 +3,13 @@
 declare(strict_types=1);
 
 require_once 'Lexer.php';
-
-
-abstract class Statement {}
-
-class DataStatement extends Statement {
-    public string $data;
-
-    public function __construct(string $data) {
-        $this->data = $data;
-    }
-}
-
-
-
-class ForeachStatement extends Statement {
-    public string $iterableIdentifier;
-    public string $asIdentifier;
-    public array $statements;
-
-    public function __construct(string $iterableIdentifier, string $asIdentifier, array $statements) {
-        $this->iterableIdentifier = $iterableIdentifier;
-        $this->asIdentifier = $asIdentifier;
-        $this->statements = $statements;
-    }
-}
-
-
-class IdentifierStatement extends Statement {
-    public string $name;
-
-    public function __construct(string $name) {
-        $this->name = $name;
-    }
-}
-
-
-class AccessArrayStatement extends Statement {
-    public string $arrayIdentifier;
-    public Statement $keyStatement;
-
-    public function __construct(string $arrayIdentifier, Statement $keyStatement) {
-        $this->arrayIdentifier = $arrayIdentifier;
-        $this->keyStatement = $keyStatement;
-    }
-}
-
-
-class StringStatement extends Statement {
-    public string $value;
-
-    public function __construct(string $value) {
-        $this->value = $value;
-    }
-}
-
-
-class EndBlockStatement extends Statement {
-    public string $blockName;
-
-    public function __construct(string $blockName) {
-        $this->blockName = $blockName;
-    }
-}
+require_once 'statements/Statement.php';
+require_once 'statements/IdentifierStatement.php';
+require_once 'statements/DataStatement.php';
+require_once 'statements/EndBlockStatement.php';
+require_once 'statements/ForeachStatement.php';
+require_once 'statements/AccessArrayStatement.php';
+require_once 'statements/StringStatement.php';
 
 
 class Parser {

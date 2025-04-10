@@ -3,6 +3,13 @@
 declare(strict_types=1);
 
 require_once 'Parser.php';
+require_once 'statements/Statement.php';
+require_once 'statements/IdentifierStatement.php';
+require_once 'statements/DataStatement.php';
+require_once 'statements/EndBlockStatement.php';
+require_once 'statements/ForeachStatement.php';
+require_once 'statements/AccessArrayStatement.php';
+require_once 'statements/StringStatement.php';
 
 
 class Compiler {
@@ -25,7 +32,7 @@ class Compiler {
         return $result;
     }
 
-    private function compileStatement($statement): string {
+    private function compileStatement($statement): string|null {
         if ($statement instanceof DataStatement)
             return $statement->data; 
 
@@ -40,6 +47,8 @@ class Compiler {
 
         if ($statement instanceof AccessArrayStatement)
             return strval($this->parameters[$statement->arrayIdentifier][$this->compileStatement($statement->keyStatement)]);
+    
+        return null;
     }
 
     private function compileForeachStatement($statement): string {
