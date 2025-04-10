@@ -14,6 +14,12 @@ enum TokenType {
     case CLOSE_BRACE;
     case STRING_LITERAL;
     case IDENTIFIER;
+    case GREATER_THAN;
+    case LESS_THAN;
+    case GREATER_THAN_OR_EQUAL;
+    case LESS_THAN_OR_EQUAL;
+    case EQUAL;
+    case NOT_EQUAL;
     case EOF;
 }
 
@@ -32,9 +38,18 @@ class Token {
 const CONST_DATA_TOKENS = [
     "endforeach" => TokenType::KEYWORD,
     "foreach" => TokenType::KEYWORD,
+    "endif" => TokenType::KEYWORD,
+    "else" => TokenType::KEYWORD,
     "as" => TokenType::KEYWORD,
+    "if" => TokenType::KEYWORD,
     "{{" => TokenType::BLOCK_BEGIN,
     "}}" => TokenType::BLOCK_END,
+    ">=" => TokenType::GREATER_THAN_OR_EQUAL,
+    "<=" => TokenType::LESS_THAN_OR_EQUAL,
+    "==" => TokenType::EQUAL,
+    "!=" => TokenType::NOT_EQUAL,
+    ">" => TokenType::GREATER_THAN,
+    "<" => TokenType::LESS_THAN,
     "(" => TokenType::OPEN_PAREN,
     ")" => TokenType::CLOSE_PAREN,
     "[" => TokenType::OPEN_BRACE,
