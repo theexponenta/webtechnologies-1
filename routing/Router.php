@@ -12,10 +12,12 @@ class Router {
 
     private array $routes;
     private DBSession $dbSession;
+    private TemplateEngine $templateEngine;
 
-    public function __construct(DBSession $dbSession) {
+    public function __construct(DBSession $dbSession, TemplateEngine $templateEngine) {
         $this->routes = [];
         $this->dbSession = $dbSession;
+        $this->templateEngine = $templateEngine;
     }
 
     public function route(Request $request) {
@@ -27,7 +29,7 @@ class Router {
             return;
         }
 
-        $controller = new ($route->getControllerClass())($this->dbSession);
+        $controller = new ($route->getControllerClass())($this->dbSession, $this->templateEngine);
         
         $controllerMethod = $route->getControllerMethod();
         echo $controller->$controllerMethod($request);

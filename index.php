@@ -10,8 +10,9 @@ $config = json_decode(file_get_contents("config.json"), true);
 
 $dbConfig = $config["database"];
 $session = new DBSession($dbConfig["host"], $dbConfig["port"], $dbConfig["username"], $dbConfig["password"], $dbConfig["dbname"]);
+$templateEngine = new TemplateEngine(__DIR__.'/public/views');
 
-$router = new Router($session);
+$router = new Router($session, $templateEngine);
 $router->addRoute('GET', '/', MainController::class, 'view');
 $router->addRoute('GET', '/admin', AdminController::class, 'action');
 $router->addRoute('POST', '/admin', AdminController::class, 'action');

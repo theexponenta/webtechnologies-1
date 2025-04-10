@@ -42,4 +42,15 @@ class Product {
     public function getStars() {
         return $this->stars;
     }
+
+    public function toArray() {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'price' => $this->price,
+            'description' => $this->description,
+            'imageUrl' => $this->imageUrl,
+            'stars' => $this->stars
+        ];
+    }
 }

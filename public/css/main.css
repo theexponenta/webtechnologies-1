@@ -53,3 +53,20 @@ button.add-to-cart:hover {
     background-color: #ff4500;
 }
 
+.price {
+    font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.description {
+    font-size: 14px;
+    color: #666;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
