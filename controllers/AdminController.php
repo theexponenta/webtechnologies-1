@@ -37,35 +37,16 @@ class AdminController {
             return $this->show($request);
 
         $action = $params["action"];
+        if (method_exists($this, $action))
+            return $this->$action($request);
 
-        $json = null;
-        if ($request->getMethod() == "POST")
-            $json = $request->json();
-        
-        if ($action == "createDirectory") {
-            return $this->createDirectory($json["path"]);
-        }
-
-        if ($action == "createFile") {
-            return $this->createFile($json["path"]);
-        }
-
-        if ($action == "saveFile") {
-            return $this->saveFile($json["path"], $json["contents"], $json["isBase64"]);
-        }
-
-        if ($action == "deleteFile") {
-            return $this->deleteFile($json["path"]);
-        }
-
-        if ($action == "getFileContents") {
-            return $this->getFileContents($params["path"]);
-        }
-
-        return json_encode(["error" => "Unknown action"]);
+        return json_encode(["error" => "Unknown action: $action"]);
     }
 
-    private function createDirectory(string $path): string {
+    private function createDirectory(Request $request): string {
+        $json = $request->json();
+        $path = $json["path"];
+
         if ($this->adminService->directoryExists($path))
             return json_encode(["error" => "Directory already exists"]);
 
@@ -73,7 +54,10 @@ class AdminController {
         return json_encode(["success" => true]);
     }
 
-    private function createFile($path): string {
+    private function createFile(Request $request): string {
+        $json = $request->json();
+        $path = $json["path"];
+
         if (file_exists($path))
             return json_encode(["error" => "File already exists"]);
 
@@ -81,17 +65,20 @@ class AdminController {
         return json_encode(["success" => true]);
     }
 
-    private function saveFile(string $path, string $content, bool $isBase64): string {
-        $this->adminService->saveFile($path, $content, $isBase64);
+    private function saveFile(Request $request): string {
+        $json = $request->json();
+        $this->adminService->saveFile($json["path"], $json["contents"], $json["isBase64"]);
         return json_encode(["success" => true]);
     }
 
-    private function deleteFile(string $path): string {
-        $this->adminService->deleteFile($path);
+    private function deleteFile(Request $request): string {
+        $json = $request->json();
+        $this->adminService->deleteFile($json["path"]);
         return json_encode(["success" => true]);
     }
 
-    private function getFileContents(string $path): string {
+    private function getFileContents(Request $request): string {
+        $path = $request->getParams()["path"];
         return json_encode(["contents" => $this->adminService->getFileContents($path)]);
     }
 }
