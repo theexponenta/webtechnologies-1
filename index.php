@@ -5,6 +5,7 @@ require_once 'controllers/AdminController.php';
 require_once 'database/DBSession.php';
 require_once 'routing/Request.php';
 require_once 'routing/Router.php';
+require_once 'routes.php';
 
 $config = json_decode(file_get_contents("config.json"), true);
 
@@ -13,8 +14,9 @@ $session = new DBSession($dbConfig["host"], $dbConfig["port"], $dbConfig["userna
 $templateEngine = new TemplateEngine(__DIR__.'/public/views');
 
 $router = new Router($session, $templateEngine);
-$router->addRoute('GET', '/', MainController::class, 'view');
-$router->addRoute('GET', '/admin', AdminController::class, 'action');
-$router->addRoute('POST', '/admin', AdminController::class, 'action');
+
+foreach ($ROUTES as $route) {
+    $router->addRoute($route['method'], $route['path'], $route['controllerClass'], $route['controllerMethod']);
+}
 
 $router->route(Request::fromCurrentRequest());
