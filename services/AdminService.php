@@ -6,19 +6,19 @@ require_once __DIR__.'/../utils.php';
 
 
 class AdminService {
-    private static string $basePath = __DIR__."/../public";
+    private string $basePath = __DIR__."/../public";
 
-    private static function isInBasePath(string $path): bool {
-        return str_starts_with(realpath($path), realpath(AdminService::$basePath));
+    private function isInBasePath(string $path): bool {
+        return str_starts_with(realpath($path), realpath($this->basePath));
     }
 
-    public static function listDirectory(string $dir): array {
+    public function listDirectory(string $dir): array {
         $result = [];
 
         $dirTrimmed = trim($dir, "/");
-        $fullPath = AdminService::$basePath."/".$dirTrimmed;
+        $fullPath = $this->basePath."/".$dirTrimmed;
 
-        if (!AdminService::isInBasePath($fullPath))
+        if (!$this->isInBasePath($fullPath))
             return $result;
 
         $files = scandir($fullPath, SCANDIR_SORT_ASCENDING);
@@ -36,21 +36,21 @@ class AdminService {
         return $result;
     }
 
-    public static function directoryExists(string $path): bool {
+    public function directoryExists(string $path): bool {
         $pathTrimmed = trim($path, "/");
-        $fullPath = realpath(AdminService::$basePath."/".$pathTrimmed);
+        $fullPath = realpath($this->basePath."/".$pathTrimmed);
         if (!$fullPath)
             return false;
 
         return is_dir($fullPath);
     }
 
-    public static function createDirectory(string $path): void {
+    public function createDirectory(string $path): void {
         $pathTrimmed = trim($path, "/");
-        $fullPath = AdminService::$basePath."/".$pathTrimmed;
+        $fullPath = $this->basePath."/".$pathTrimmed;
         
         $parentDirectory = realpath(dirname($fullPath));
-        if (!AdminService::isInBasePath($parentDirectory))
+        if (!$this->isInBasePath($parentDirectory))
             return;
 
         if (is_dir($parentDirectory."/".$pathTrimmed))
@@ -59,12 +59,12 @@ class AdminService {
         mkdir($fullPath);
     }
 
-    public static function createFile(string $path): void {
+    public function createFile(string $path): void {
         $pathTrimmed = trim($path, "/");
-        $fullPath = AdminService::$basePath."/".$pathTrimmed;
+        $fullPath = $this->basePath."/".$pathTrimmed;
         
         $parentDirectory = dirname($fullPath);
-        if (!AdminService::isInBasePath($parentDirectory))
+        if (!$this->isInBasePath($parentDirectory))
             return;
 
         if (file_exists($parentDirectory."/".$pathTrimmed))
@@ -73,12 +73,12 @@ class AdminService {
         touch($fullPath);
     }
 
-    public static function saveFile(string $path, string $content, bool $isBase64): void {
+    public function saveFile(string $path, string $content, bool $isBase64): void {
         $pathTrimmed = trim($path, "/");
-        $fullPath = AdminService::$basePath."/".$pathTrimmed;
+        $fullPath = $this->basePath."/".$pathTrimmed;
         
         $parentDirectory = dirname($fullPath);
-        if (!AdminService::isInBasePath($parentDirectory))
+        if (!$this->isInBasePath($parentDirectory))
             return;
 
         if ($isBase64)
@@ -87,11 +87,11 @@ class AdminService {
         file_put_contents($fullPath, $content);
     }
 
-    public static function deleteFile(string $path): void {
+    public function deleteFile(string $path): void {
         $pathTrimmed = trim($path, "/");
-        $fullPath = AdminService::$basePath."/".$pathTrimmed;
+        $fullPath = $this->basePath."/".$pathTrimmed;
         
-        if (!AdminService::isInBasePath($fullPath))
+        if (!$this->isInBasePath($fullPath))
             return;
 
         if (is_dir($fullPath))
@@ -100,11 +100,11 @@ class AdminService {
             unlink($fullPath);
     }
 
-    public static function getFileContents(string $path): string {
+    public function getFileContents(string $path): string {
         $pathTrimmed = trim($path, "/");
-        $fullPath = AdminService::$basePath."/".$pathTrimmed;
+        $fullPath = $this->basePath."/".$pathTrimmed;
         
-        if (!AdminService::isInBasePath($fullPath))
+        if (!$this->isInBasePath($fullPath))
             return "";
 
         return file_get_contents($fullPath);

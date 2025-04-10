@@ -10,14 +10,16 @@ require_once __DIR__.'/../template_engine/TemplateEngine.php';
 
 class AdminController {
 
+    private AdminService $adminService;
     private TemplateEngine $templateEngine;
-    private static array $filetypeIconsUrls = [
+    private array $filetypeIconsUrls = [
         "directory" => "/admin_public/img/directory.svg",
         "regular" => "/admin_public/img/regular.svg"
     ];
 
     public function __construct() {
         $this->templateEngine = new TemplateEngine(__DIR__.'/../admin_public/html');
+        $this->adminService = new AdminService();
     }
 
     public function show(Request $request): string {
@@ -25,8 +27,8 @@ class AdminController {
         if (array_key_exists("path", $request->getParams()))
             $path = $request->getParams()["path"];
 
-        $files = AdminService::listDirectory($path);
-        return $this->templateEngine->render("admin.html", ["files" => $files, "filetypeIcons" => AdminController::$filetypeIconsUrls]);
+        $files = $this->adminService->listDirectory($path);
+        return $this->templateEngine->render("admin.html", ["files" => $files, "filetypeIcons" => $this->filetypeIconsUrls]);
     }
 
     public function action(Request $request): string {
@@ -64,10 +66,10 @@ class AdminController {
     }
 
     private function createDirectory(string $path): string {
-        if (AdminService::directoryExists($path))
+        if ($this->adminService->directoryExists($path))
             return json_encode(["error" => "Directory already exists"]);
 
-        AdminService::createDirectory($path);
+        $this->adminService->createDirectory($path);
         return json_encode(["success" => true]);
     }
 
@@ -75,21 +77,21 @@ class AdminController {
         if (file_exists($path))
             return json_encode(["error" => "File already exists"]);
 
-        AdminService::createFile($path);
+        $this->adminService->createFile($path);
         return json_encode(["success" => true]);
     }
 
     private function saveFile(string $path, string $content, bool $isBase64): string {
-        AdminService::saveFile($path, $content, $isBase64);
+        $this->adminService->saveFile($path, $content, $isBase64);
         return json_encode(["success" => true]);
     }
 
     private function deleteFile(string $path): string {
-        AdminService::deleteFile($path);
+        $this->adminService->deleteFile($path);
         return json_encode(["success" => true]);
     }
 
     private function getFileContents(string $path): string {
-        return json_encode(["contents" => AdminService::getFileContents($path)]);
+        return json_encode(["contents" => $this->adminService->getFileContents($path)]);
     }
 }
