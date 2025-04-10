@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once __DIR__.'/../utils.php';
+require_once __DIR__.'/../utils/Utils.php';
 
 
 class AdminService {
@@ -95,7 +95,7 @@ class AdminService {
             return;
 
         if (is_dir($fullPath))
-            rrmdir($fullPath);
+            Utils::rrmdir($fullPath);
         else
             unlink($fullPath);
     }
