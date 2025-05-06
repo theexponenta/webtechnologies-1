@@ -86,7 +86,7 @@ class Lexer {
                 $this->eof = true;
 
             $this->readingData = false;
-            if ($startIndex != $this->index)
+            if ($startIndex !== $this->index)
                 return new Token(TokenType::DATA, substr($this->source, $startIndex, $this->index - $startIndex));
         
             return $this->readConstDataToken();
@@ -96,7 +96,7 @@ class Lexer {
         
         $constDataToken = $this->readConstDataToken();
         if ($constDataToken) {
-            $this->readingData = $constDataToken->type == TokenType::BLOCK_END;
+            $this->readingData = $constDataToken->type === TokenType::BLOCK_END;
             return $constDataToken;
         }
 
@@ -121,7 +121,7 @@ class Lexer {
         $strInd = 0;
         $sourceInd = $this->index;
         while ($result && $sourceInd < strlen($this->source) && $strInd < strlen($string)) {
-            $result = $this->source[$sourceInd] == $string[$strInd];
+            $result = $this->source[$sourceInd] === $string[$strInd];
             $sourceInd++;
             $strInd++;
         }
@@ -141,7 +141,7 @@ class Lexer {
     }
 
     private function isIdentifierChar(string $c): bool {
-        return ctype_alnum($c) || $c == '_';
+        return ctype_alnum($c) || $c === '_';
     }
 
     private function readIdentifierToken(): Token | null {
@@ -159,12 +159,12 @@ class Lexer {
 
     private function readStringLiteral(): Token | null {
         $enclosingChar = $this->source[$this->index];
-        if ($enclosingChar != '"' && $enclosingChar != "'")
+        if ($enclosingChar !== '"' && $enclosingChar !== "'")
             return null;
 
         $startIndex = $this->index;
         $this->index++;
-        while ($this->source[$this->index] != $enclosingChar) {
+        while ($this->source[$this->index] !== $enclosingChar) {
             $this->index++;
         }
 

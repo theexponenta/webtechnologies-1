@@ -23,7 +23,7 @@ class AdminService {
 
         $files = scandir($fullPath, SCANDIR_SORT_ASCENDING);
         foreach ($files as $file) {
-            if ($file == ".")
+            if ($file === ".")
                 continue;
 
             $filetype = "regular";

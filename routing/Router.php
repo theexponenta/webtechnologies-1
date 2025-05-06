@@ -41,7 +41,7 @@ class Router {
 
     private function getRoute($path, $method) {
         foreach ($this->routes as $route) {
-            if ($route->getPath() == $path && $route->getMethod() == $method) {
+            if ($route->getPath() === $path && $route->getMethod() === $method) {
                 return $route;
             }
         }

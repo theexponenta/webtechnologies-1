@@ -33,7 +33,7 @@ class AdminController {
 
     public function action(Request $request): string {
         $params = $request->getParams();
-        if ($request->getMethod() == "GET" && !array_key_exists("action", $params))
+        if ($request->getMethod() === "GET" && !array_key_exists("action", $params))
             return $this->show($request);
 
         $action = $params["action"];
