@@ -2,37 +2,8 @@
 
 declare(strict_types=1);
 
-
-enum TokenType {
-    case DATA;
-    case BLOCK_BEGIN;
-    case BLOCK_END;
-    case KEYWORD;
-    case OPEN_PAREN;
-    case CLOSE_PAREN;
-    case OPEN_BRACE;
-    case CLOSE_BRACE;
-    case STRING_LITERAL;
-    case IDENTIFIER;
-    case GREATER_THAN;
-    case LESS_THAN;
-    case GREATER_THAN_OR_EQUAL;
-    case LESS_THAN_OR_EQUAL;
-    case EQUAL;
-    case NOT_EQUAL;
-    case EOF;
-}
-
-
-class Token {
-    public TokenType $type;
-    public string | null $value;
-
-    public function __construct(TokenType $type, string | null $value) {
-        $this->type = $type;
-        $this->value = $value;
-    }
-}
+require_once 'Lexer.php';
+require_once 'Token.php';
 
 
 const CONST_DATA_TOKENS = [
