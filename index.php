@@ -19,4 +19,6 @@ foreach ($ROUTES as $route) {
     $router->addRoute($route['method'], $route['path'], $route['controllerClass'], $route['controllerMethod']);
 }
 
+$session->connect();
 $router->route(Request::fromCurrentRequest());
+$session->close();

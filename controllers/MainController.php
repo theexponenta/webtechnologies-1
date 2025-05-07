@@ -6,6 +6,8 @@ declare(strict_types=1);
 require_once __DIR__.'/../database/DBSession.php';
 require_once __DIR__.'/../routing/Request.php';
 require_once __DIR__.'/../services/ProductService.php';
+require_once __DIR__.'/../repositories/ProductRepository.php';
+require_once __DIR__.'/../template_engine/TemplateEngine.php';
 
 
 class MainController {
@@ -19,7 +21,7 @@ class MainController {
     }
 
     public function view(Request $request): string {
-        $service = new ProductService();
+        $service = new ProductService(new ProductRepository($this->dbSession));
         $products = $service->getAllProducts($this->dbSession);
         for ($i = 0; $i < count($products); $i++) {
             $products[$i] = $products[$i]->toArray();

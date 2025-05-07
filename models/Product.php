@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
+require_once 'Model.php';
 
-class Product {
+
+class Product extends Model {
     private int $id;
     private string $name;
     private float $price;
@@ -52,5 +54,16 @@ class Product {
             'imageUrl' => $this->imageUrl,
             'stars' => $this->stars
         ];
+    }
+
+    public static function fromRow(array $row): Product {
+        return new Product(
+            (int)$row['id'],
+            $row['name'],
+            (float)$row['price'],
+            $row['description'],
+            $row['image_url'],
+            (float)$row['stars']
+        );
     }
 }
