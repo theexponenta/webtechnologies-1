@@ -53,8 +53,7 @@ class Lexer {
             while ($this->index < strlen($this->source) && !$this->nextStringEquals("{{"))
                 $this->index++;
 
-            if ($this->index >= strlen($this->source))
-                $this->eof = true;
+            $this->eof = $this->index >= strlen($this->source);
 
             $this->readingData = false;
             if ($startIndex !== $this->index)
