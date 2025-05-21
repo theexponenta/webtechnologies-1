@@ -9,6 +9,8 @@ require_once __DIR__.'/../config/Config.php';
 class LoginController {
 
     private TemplateEngine $templateEngine;
+    
+    private static string $LOGIN_TEMPLATE = "login.html";
 
     public function __construct(DBSession $dbSession, TemplateEngine $templateEngine) {
         $this->templateEngine = $templateEngine;
@@ -16,7 +18,7 @@ class LoginController {
 
     public function view(Request $request): string {
         $config = Config::getConfig();
-        return $this->templateEngine->render("login.html", ["captcha" => $config["captcha"]]);    
+        return $this->templateEngine->render(self::$LOGIN_TEMPLATE, ["captcha" => $config["captcha"]]);    
     }
 
 }

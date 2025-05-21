@@ -11,13 +11,15 @@ class RegisterController {
 
     private TemplateEngine $templateEngine;
 
+    private static string $REGISTER_TEMPLATE = "register.html";
+
     public function __construct(DBSession $dbSession, TemplateEngine $templateEngine) {
         $this->templateEngine = $templateEngine;
     }
 
     public function view(Request $request): string {
         $config = Config::getConfig();
-        return $this->templateEngine->render("register.html", ["captcha" => $config["captcha"]]);    
+        return $this->templateEngine->render(self::$REGISTER_TEMPLATE, ["captcha" => $config["captcha"]]);    
     }
 
 }

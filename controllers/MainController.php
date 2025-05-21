@@ -15,6 +15,8 @@ class MainController {
     private DBSession $dbSession;
     private TemplateEngine $templateEngine;
 
+    private static string $MAIN_TEMPLATE = "main.html";
+
     public function __construct(DBSession $dbSession, TemplateEngine $templateEngine) {
         $this->dbSession = $dbSession;
         $this->templateEngine = $templateEngine;
@@ -32,7 +34,7 @@ class MainController {
             $user = $_SESSION['user'];
         }
 
-        return $this->templateEngine->render("main.html", ["products" => $products, "user" => $user]);    
+        return $this->templateEngine->render(self::$MAIN_TEMPLATE, ["products" => $products, "user" => $user]);    
     }
 
 }
