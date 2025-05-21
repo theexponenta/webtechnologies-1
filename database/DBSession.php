@@ -34,11 +34,15 @@ class DBSession {
         }
     }
 
-    public function query(string $query, ?array $params = null): mysqli_result|false {
+    public function query(string $query, ?array $params = null): mysqli_result|bool {
         return $this->connection->execute_query($query, $params);
     }
 
     public function affetedRows(): int {
         return $this->connection->affected_rows;
+    }
+
+    public function lastInsertId(): int {
+        return $this->connection->insert_id;
     }
 }

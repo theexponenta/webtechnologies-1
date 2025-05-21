@@ -23,9 +23,13 @@ class Compiler {
 
     public function compile($parameters): string {
         $this->parameters = $parameters;
+        return $this->compileStatements($this->statements);
+    }
+
+    private function compileStatements(array $statements) {
         $result = "";
 
-        foreach ($this->statements as $statement) {
+        foreach ($statements as $statement) {
             $result .= $this->compileStatement($statement);
         }
 
@@ -48,6 +52,14 @@ class Compiler {
         if ($statement instanceof AccessArrayStatement)
             return strval($this->parameters[$statement->arrayIdentifier][$this->compileStatement($statement->keyStatement)]);
     
+        if ($statement instanceof IfStatement) {
+            if ($this->parameters[$statement->var1Identifier]) {
+                return $this->compileStatements($statement->trueStatements);
+            }
+            else
+                return $this->compileStatements($statement->falseStatements);
+        }
+
         return null;
     }
 

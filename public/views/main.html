@@ -9,6 +9,20 @@
 </head>
 <body>
 
+    <div class="auth-buttons">
+        {{ if (user) }}
+
+        <button class="logout" id="logout">Выйти</button>
+
+        {{ else }}
+
+
+        <button class="login"><a href="/login">Войти</a></button>
+        <button class="register"><a href="/register">Зарегистрироваться</a></button>
+
+        {{ endif }}
+    </div>
+
     <h1>Список товаров</h1>
 
     <div class="product-grid">

@@ -12,12 +12,12 @@ class User extends Model {
     private string $email;
     private string $password;
     private string $salt;
-    private string $token;
+    private ?string $token;
     private DateTime $registerTime;
-    private DateTime $lastLogin;
+    private ?DateTime $lastLogin;
     private bool $isVerified;
 
-    public function __construct(int $id, string $firstName, string $lastName, string $email, string $password, string $salt, string $token, DateTime $registerTime, DateTime $lastLogin, bool $isVerified) {
+    public function __construct(int $id, string $firstName, string $lastName, string $email, string $password, string $salt, ?string $token, DateTime $registerTime, ?DateTime $lastLogin, bool $isVerified) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -30,47 +30,51 @@ class User extends Model {
         $this->isVerified = $isVerified;
     }
 
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getFirstName() {
+    public function getFirstName(): string {
         return $this->firstName;
     }
 
-    public function getLastName() {
+    public function getLastName(): string {
         return $this->lastName;
     }
 
-    public function getEmail() {
+    public function getEmail(): string {
         return $this->email;
     }
 
-    public function getPassword() {
+    public function getPassword(): string {
         return $this->password;
     }
 
-    public function getSalt() {
+    public function getSalt(): string {
         return $this->salt;
     }
 
-    public function getToken() {
+    public function getToken(): ?string {
         return $this->token;
     }
 
-    public function getRegisterTime() {
+    public function getRegisterTime(): DateTime {
         return $this->registerTime;
     }
 
-    public function getLastLogin() {
+    public function getLastLogin(): ?DateTime {
         return $this->lastLogin;
     }
 
-    public function isVerified() {
+    public function isVerified(): bool {
         return $this->isVerified;
     }
 
     public static function fromRow(array $row): User {
+        $lastLogin = null;
+        if ($row['last_login'])
+            $lastLogin = new DateTime($row['last_login']);
+
         return new User(
             (int)$row['id'],
             $row['first_name'],
@@ -80,7 +84,7 @@ class User extends Model {
             $row['salt'],
             $row['token'],
             new DateTime($row['register_time']),
-            new DateTime($row['last_login']),
+            $lastLogin,
             (bool)$row['is_verified']
         );
     }

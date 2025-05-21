@@ -17,5 +17,19 @@ class Utils {
           rmdir($dir); 
         } 
     }
+
+    public static function hashPassword(string $password, string $salt) : string {
+      return hash('sha256', $password.':'.$salt);
+    }
+
+    public static function setUserSessionData(User $user): void {
+        $_SESSION['user'] = [
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'firstName' => $user->getFirstName(),
+            'lastName' => $user->getLastName(),
+            'token' => $user->getToken()
+        ];
+    }
 }
 

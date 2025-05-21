@@ -10,6 +10,7 @@ require_once 'statements/EndBlockStatement.php';
 require_once 'statements/ForeachStatement.php';
 require_once 'statements/AccessArrayStatement.php';
 require_once 'statements/StringStatement.php';
+require_once 'statements/IfStatement.php';
 
 
 class Parser {
@@ -52,11 +53,14 @@ class Parser {
         $this->blockStatementDepth++;
 
         $currentToken = $this->lexer->nextToken();
+        $nextToken = null;
+        $readNextToken = true;
 
         $result = null;
 
         if ($currentToken->type === TokenType::IDENTIFIER) {
             $nextToken = $this->lexer->nextToken();
+            $readNextToken = false;
 
             if ($nextToken->type === TokenType::OPEN_BRACE)
                 $result = $this->parseAccessArrayExpression($currentToken->value);
@@ -68,8 +72,16 @@ class Parser {
             $result = $this->parseForeach();
         } else if ($currentToken->type === TokenType::STRING_LITERAL) {
             $result = new StringStatement($currentToken->value);
-        } 
-        
+        } else if ($currentToken->type === TokenType::KEYWORD && $currentToken->value === "if") {
+            $result = $this->parseIf();
+        } else if ($currentToken->type === TokenType::KEYWORD && $currentToken->value === "endif") {
+            $result = new EndBlockStatement($currentToken->value);
+            $this->lexer->nextToken();
+        } else if ($currentToken->type === TokenType::KEYWORD && $currentToken->value === "else") {
+            $result = new EndBlockStatement($currentToken->value);
+            $this->lexer->nextToken();
+        }
+
         if ($this->blockStatementDepth === 1 && $this->lexer->nextToken()->type !== TokenType::BLOCK_END)
             throw new Exception("Unexpected token type: ".$currentToken->type->name);
 
@@ -111,6 +123,40 @@ class Parser {
             }
 
             array_push($statements, $statement);
+        }
+    }
+
+    private function parseIf() : IfStatement {
+        if ($this->lexer->nextToken()->type !== TokenType::OPEN_PAREN)
+            throw new Exception("Expected '('");
+
+        $identifierToken = $this->lexer->nextToken();
+        if ($identifierToken->type !== TokenType::IDENTIFIER)
+            throw new Exception("Expected identifier");
+        
+        if ($this->lexer->nextToken()->type !== TokenType::CLOSE_PAREN)
+            throw new Exception("Expected ')'");
+
+        if ($this->lexer->nextToken()->type !== TokenType::BLOCK_END)
+            throw new Exception("Expected '}}'");
+        
+        $trueStatements = [];
+        $falseStatements = [];
+
+        $statementsArr = &$trueStatements;
+
+        while (!$this->lexer->eof()) {
+            $statement = $this->parseStatement();
+
+            if ($statement instanceof EndBlockStatement) {
+                if ($statement->blockName === "else") {
+                    $statementsArr = &$falseStatements;
+                } else if ($statement->blockName === "if") {
+                    return new IfStatement($identifierToken->value, $identifierToken->value, ConditionType::EQUAL, $trueStatements, $falseStatements);
+                }
+            }
+
+            array_push($statementsArr, $statement);
         }
     }
 

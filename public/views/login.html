@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="/public/css/auth.css">
+    <script src="/public/js/login.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+    <div class="login-container">
+        <h2>Вход в аккаунт</h2>
+
+        <form id="login_form">
+            <div class="form-group">
+                <label for="email">Электронная почта</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group remember-me">
+                <label for="remember_me">
+                    <input type="checkbox" name="remember_me">
+                    Запомнить меня
+                </label>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="{{ captcha['site_key'] }}"></div>
+            <button type="submit" class="form-submit-button">Войти</button>
+        </form>
+
+        <p class="register-link">Нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+    </div>
+
+</body>
+</html>
+
+

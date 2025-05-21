@@ -48,7 +48,12 @@ class Request {
         $params = $_GET;
         $body = file_get_contents('php://input');
         $formParams = null;
-        if ($method === "POST" && $_SERVER['CONTENT_TYPE'] === 'application/x-www-formurlencoded')
+
+        $contentType = null;
+        if (isset($_SERVER['CONTENT_TYPE']))
+            $contentType = $_SERVER['CONTENT_TYPE'];
+
+        if ($method === "POST" && $contentType === 'application/x-www-form-urlencoded')
             $formParams = $_POST;
 
         return new Request($method, $path, $params, $body, $formParams);

@@ -27,7 +27,12 @@ class MainController {
             $products[$i] = $products[$i]->toArray();
         }
 
-        return $this->templateEngine->render("main.html", ["products" => $products]);    
+        $user = null;
+        if (isset($_SESSION['user'])) {
+            $user = $_SESSION['user'];
+        }
+
+        return $this->templateEngine->render("main.html", ["products" => $products, "user" => $user]);    
     }
 
 }
